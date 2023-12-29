@@ -1,36 +1,27 @@
-import axios from 'axios'
-import React from 'react'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchCountry } from '../features/countrySlice'
 
 const Country = () => {
 
-    const [country, setCountry] = useState([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                
-                const response = await axios.get('https://searchartback-production-dc78.up.railway.app/api/country/?indicator=Gross%20Domestic%20Product%20billions%20of%20U.S.%20dollars');
-                setCountry(response.data);
-            } catch (error) {
-                console.error(error);
-            }
-        }
+        dispatch(fetchCountry());
 
-        fetchData();
-    }, []);
+    }, [dispatch]);
 
-    console.log(country);
-
+    const countries = useSelector((state) => state.country.countries);
 
     return (
         <div className="relative  ">
             <h1 className='text-[#A7B4CA] my-2'>Country</h1>
-            <select className="select-none w-full p-2.5 text-[#A7B4CA] bg-[#293F64] border border-[#4A628A]  shadow-sm outline-none appearance-none  rounded-[7px]">
-                {country.map((item, index) => (
-                    <option key={index}>{item}</option>
-                ))}
-
+            <select className="select-none w-tfull p-2.5  text-[#A7B4CA] bg-[#293F64] border border-[#4A628A]  shadow-sm outline-none appearance-none  rounded-[7px]">
+                {
+                    countries.map((country) => (
+                        <option key={country} value={country}>{country}</option>
+                    ))
+                }
             </select>
         </div>
     )

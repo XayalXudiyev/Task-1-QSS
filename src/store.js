@@ -1,13 +1,12 @@
-// import { configureStore } from '@reduxjs/toolkit'
-// import { fetchCountry } from './features/country/fetchedDataSlice'
-// // import { fetchCountry } from './features/country/fetchedDataSlice'
-// // import { fetchCountry } from './features/country/fetchedDataSlice'
+import { configureStore } from '@reduxjs/toolkit'
+import countrySlice from './features/countrySlice'
+import sectorSlice from './features/sectorSlice'
+import subsectorSlice from './features/subsectorSlice'
 
-// export const store = configureStore({
-//   reducer: {
-//     country : fetchCountry,
-//     // sector : fetchSector,
-//     // subSector : fetchSubSector,
-//     // indigator : fetchIndigator,
-//   },
-// })
+export const store = configureStore({
+  reducer: {
+   country : countrySlice,
+   sector : sectorSlice,
+   subsector : subsectorSlice
+  },
+}) 
